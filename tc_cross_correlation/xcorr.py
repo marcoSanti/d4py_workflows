@@ -53,7 +53,8 @@ def xcorrf_noFFT(IN1, IN2, shift=None):
     """
 
 
-    IN = IN1*conjugate(IN2)
+    min_len = min(len(IN1), len(IN2))
+    IN = IN1[:min_len] * conjugate(IN2[:min_len])
     ret = ifft(IN)
 
     ret = ret.real

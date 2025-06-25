@@ -2,19 +2,20 @@
 # is to be done with the xc's.
 # and look at data from the shm in memory files.
 
-from dispel4py.core import GenericPE 
+from dispel4py.core import GenericPE
 from dispel4py.workflow_graph import WorkflowGraph
 from dispel4py.base import BasePE, IterativePE, ConsumerPE, create_iterative_chain
 
 import sys, os
-sys.path.append('/home/user/d4py_workflows/tc_cross_correlation')
+
+sys.path.append('/home/marco/Desktop/collab_rosa_f/d4py_workflows/tc_cross_correlation')
 
 import numpy as np
 import time
 import os, shutil
 import traceback
-from  xcorr import xcorrf, xcorrf_noFFT 
-from  distutils.dir_util  import create_tree as mkadir
+from xcorr import xcorrf, xcorrf_noFFT
+from distutils.dir_util import create_tree as mkadir
 import matplotlib as mpl
 mpl.use('Agg')
 import matplotlib.pyplot as plt
@@ -22,7 +23,7 @@ import matplotlib.backends
 from obspy import read
 
 ROOT_DIR = './OUTPUT/'
-starttime='2018-10-02T06:00:00.000'
+starttime = '2018-10-02T06:00:00.000'
 
 class Product(GenericPE):
     def __init__(self):
@@ -59,17 +60,16 @@ class StoreToFile(ConsumerPE):
         ConsumerPE.__init__(self)
         self.filename = filename
         self.counter = 0
-    
+
     def _process(self, data):
         xcorr1 = data[2]
-        directory=ROOT_DIR+'XCORR/'+starttime+'/'+str(data[0])+'_'+str(data[1])
+        directory = ROOT_DIR + 'XCORR/' + starttime + '/' + str(data[0]) + '_' + str(data[1])
         if not os.path.exists(directory):
             os.makedirs(directory)
-        fout = directory+'/%s_%s_%s.out' % (self.filename, data[0], data[1])
+        fout = directory + '/%s_%s_%s.out' % (self.filename, data[0], data[1])
         np.save(fout, xcorr1)
         self.counter += 1
-        #self.log('wrote file %s' % fout)
-	
+        # self.log('wrote file %s' % fout)
 
 
 class Plot(ConsumerPE):
@@ -86,11 +86,10 @@ class Plot(ConsumerPE):
 
 
 graph = WorkflowGraph()
-product=Product()
-xcorr1=Xcorr()
-store=StoreToFile('Xcorr')
+product = Product()
+xcorr1 = Xcorr()
+store = StoreToFile('Xcorr')
 plot = Plot('Xcorr')
 graph.connect(product, 'output', xcorr1, 'input')
 graph.connect(xcorr1, 'output', store, 'input')
 graph.connect(xcorr1, 'output', plot, 'input')
-
