@@ -5,14 +5,14 @@
       "name": "prep",
       "input_stream": [],
       "output_stream": [
-        "/home/marco/Desktop/collab_rosa_f/d4py_workflows/tc_cross_correlation/OUTPUT/DATA*"
+        "/home/marco/Desktop/collab_rosa_f/d4py_workflows/tc_cross_correlation/OUTPUT/DATA/2018-10-02T06:00:00.000/*"
       ],
       "streaming": [
         {
           "dirname": [
-            "/home/marco/Desktop/collab_rosa_f/d4py_workflows/tc_cross_correlation/OUTPUT/DATA*"
+            "/home/marco/Desktop/collab_rosa_f/d4py_workflows/tc_cross_correlation/OUTPUT/DATA/2018-10-02T06:00:00.000/*"
           ],
-          "committed": "on_termination",
+          "committed": "on_close",
           "mode": "no_update"
         }
       ]
@@ -20,17 +20,17 @@
     {
       "name": "xcorr",
       "input_stream": [
-        "/home/marco/Desktop/collab_rosa_f/d4py_workflows/tc_cross_correlation/OUTPUT/DATA*"
+        "/home/marco/Desktop/collab_rosa_f/d4py_workflows/tc_cross_correlation/OUTPUT/DATA/2018-10-02T06:00:00.000/*"
       ],
       "output_stream": [
-        "/home/marco/Desktop/collab_rosa_f/d4py_workflows/tc_cross_correlation/OUTPUT/XCORR"
+        "/home/marco/Desktop/collab_rosa_f/d4py_workflows/tc_cross_correlation/OUTPUT/XCORR*"
       ],
       "streaming": [
         {
           "dirname": [
-            "/home/marco/Desktop/collab_rosa_f/d4py_workflows/tc_cross_correlation/OUTPUT/XCORR"
+            "/home/marco/Desktop/collab_rosa_f/d4py_workflows/tc_cross_correlation/OUTPUT/XCORR*"
           ],
-          "committed": "on_termination",
+          "committed": "on_close",
           "mode": "no_update"
         }
       ]

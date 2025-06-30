@@ -88,7 +88,7 @@ class StreamToFile(ConsumerPE):
         dir = ROOT_DIR + 'DATA/' + starttime
         if not os.path.exists(dir):
             os.makedirs(dir)
-        directory = dir + '/' + station
+        directory = dir
         if not os.path.exists(directory):
             os.makedirs(directory)
         try:

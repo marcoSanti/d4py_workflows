@@ -31,15 +31,14 @@ class Product(GenericPE):
         self._add_output('output', tuple_type=['number'])
     def process(self, inputs):
         store = []
-        for dir in os.scandir(ROOT_DIR + 'DATA/' + starttime):
-            for f in os.scandir(ROOT_DIR + '/DATA/' + starttime + '/' + dir.name):
-                file = ROOT_DIR + 'DATA/' + starttime + '/' + dir.name + '/' + f.name
-                str1 = np.load(file)
-                index = len(store)
-                for i in range(index):
-                    self.write('output',[i, index, store[i], str1])
-                    #self.log('The station %s is index %s' %(f,index))	
-                store.append(str1)
+        for f in os.scandir(ROOT_DIR + 'DATA/' + starttime):
+            file = ROOT_DIR + 'DATA/' + starttime + '/' + f.name
+            str1 = np.load(file)
+            index = len(store)
+            for i in range(index):
+                self.write('output',[i, index, store[i], str1])
+                #self.log('The station %s is index %s' %(f,index))
+            store.append(str1)
 
 class Xcorr(IterativePE):
     def __init__(self):
